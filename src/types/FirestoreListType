@@ -1,0 +1,11 @@
+export type FirestoreListType = {
+    uid: string,
+    name: string,
+    message: string,
+    timestamp: Date,
+    src: string,
+    star: number,
+    messages: [],
+    time: string,
+    tasks: []
+}
