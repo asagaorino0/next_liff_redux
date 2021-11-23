@@ -47,7 +47,6 @@ const FirestoreList: React.FC<FirestoreListType> = () => {
 
     const clickButton = () => {
         const db = getFirestore()
-        // const db = initializeFirestore(app, { ignoreUndefinedProperties: true })
         const docRef = setDoc(doc(db, 'users', `${uid}`), {
             uid: uid,
             name: name,
