@@ -1,20 +1,36 @@
-import { AppProps } from 'next/app'
-import { Provider } from 'react-redux'
-import { persistStore } from 'redux-persist'
-import { PersistGate } from 'redux-persist/integration/react'
-import { useStore } from '../src/store'
+import '../styles/globals.css'
+import React from "react";
+import type { AppProps } from "next/app";
+import { Provider } from "react-redux";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
-  const store = useStore()
-  const persistor = persistStore(store)
+export type CounterState = {
+  value: number;
+};
 
+const initialState: CounterState = { value: 0 };
+
+export const counterSlice = createSlice({
+  name: "counter",
+  initialState,
+  reducers: {
+    increment(state) {
+      state.value++;
+    },
+  },
+});
+
+export const store = configureStore({
+  reducer: {
+    counter: counterSlice.reducer,
+  },
+});
+
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <Component {...pageProps} />
-      </PersistGate>
+      <Component {...pageProps} />
     </Provider>
-  )
+  );
 }
-
-export default MyApp
+export default MyApp;
