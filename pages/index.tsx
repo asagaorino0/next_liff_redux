@@ -17,17 +17,13 @@ import FirestoreAddButton from '../src/firebase/FirestoreAddButton';
 import FirestoreList from '../src/firebase/FirestoreList';
 import { initializeApp, getApps } from "firebase/app"
 import { useDispatch, useSelector } from "react-redux";
-import { counterSlice, CounterState, store } from "./_app";
 import { RootState } from '../src/store'
 import { userSlice } from '../src/store/user'
 
 const Home: NextPage = () => {
-  const selector = useSelector((state: CounterState) => state);
-  const { increment } = counterSlice.actions;
-
-  const [avatar, setAvatar] = useState("");
-  const [name, setName] = useState("");
-  const [uid, setUid] = useState("");
+  // const [avatar, setAvatar] = useState("");
+  // const [name, setName] = useState("");
+  // const [uid, setUid] = useState("");
 
   // const loginUrl = process.env.LINE_LOGINURL
   const myLiffId = "1656149559-xXM4l4Gp"
@@ -168,19 +164,21 @@ const Home: NextPage = () => {
 
   const handleConfirm = () => {
     // eslint-disable-next-line
-    console.log(user)
+    // console.log(user)
+    console.log(user.user.name)
+    console.log(user.user.uid)
   }
-  const handleUpdate = () => {
-    dispatch(
-      userSlice.actions.updateUser({
-        name: 'name',
-        age: 28,
-        email: 'email',
-        token: 'token',
-        history: [],
-      })
-    )
-  }
+  // const handleUpdate = () => {
+  //   dispatch(
+  //     userSlice.actions.updateUser({
+  //       name: 'name',
+  //       age: 28,
+  //       email: 'email',
+  //       token: 'token',
+  //       history: [],
+  //     })
+  //   )
+  // }
   const handleReset = () => {
     dispatch(userSlice.actions.reset())
   }
@@ -206,15 +204,7 @@ const Home: NextPage = () => {
           Welcome to <a href="https://konoyubi.site">konoyubi</a>
         </h1>
         <div>
-          <p>{selector.value}</p>
-          <p>{selector.value}</p>
-          <button
-            onClick={() => {
-              dispatch(increment());
-            }}
-          >
-            Click
-          </button>
+
         </div>
         <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
           <button onClick={lineClick}>
@@ -226,9 +216,9 @@ const Home: NextPage = () => {
         <button type="button" onClick={handleConfirm}>
           確認
         </button>
-        <button type="button" onClick={handleUpdate}>
-          update
-        </button>
+        {/* <button type="button" onClick={handleUpdate}> */}
+        {/* update
+        </button> */}
         <button type="button" onClick={handleReset}>
           reset
         </button>
